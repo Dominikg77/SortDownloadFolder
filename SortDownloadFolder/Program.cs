@@ -44,6 +44,21 @@
                         Console.WriteLine("Unterordner erstellt: " + extensionSubfolder);
                     }
                 }
+                else
+                {
+                    // Wenn die Erweiterung nicht in extensionFolders enthalten ist, verschiebe die Datei in den "other"-Ordner
+                    string otherFolder = Path.Combine(DOWNLOAD_PATH, "other");
+                    string extensionSubfolder = Path.Combine(otherFolder, fileExtension.TrimStart('.'));
+                    string destinationFilePath = Path.Combine(extensionSubfolder, fileName);
+
+                    if (!Directory.Exists(extensionSubfolder))
+                    {
+                        Directory.CreateDirectory(extensionSubfolder);
+                    }
+
+                    File.Move(file, destinationFilePath); // Datei in den Unterordner mit der Erweiterung verschieben
+                    Console.WriteLine("Datei in den 'other'-Ordner verschoben: " + fileName);
+                }
             }
 
             // Lösche alle leeren Ordner rekursiv
@@ -56,17 +71,13 @@
             foreach (var directory in Directory.GetDirectories(path))
             {
                 DeleteEmptyFolders(directory);
-                //Console.WriteLine("Über Verzeichnis gelösch: " + directory);
 
                 if (Directory.GetFiles(directory).Length == 0 && Directory.GetDirectories(directory).Length == 0)
                 {
                     Directory.Delete(directory); // Lösche den leeren Ordner
                     Console.WriteLine("Ordner gelöscht: " + directory);
-
                 }
             }
         }
     }
-
-
 }

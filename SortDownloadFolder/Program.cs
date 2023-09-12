@@ -18,7 +18,10 @@
         { ".xml", "documents" },
         { ".jpg", "images" },
         { ".png", "images" },
-        { ".gif", "images" }
+        { ".gif", "images" },
+        { ".mp3", "media" },
+        { ".mp4", "media" }
+
     };
 
             // Schleife über alle Dateien

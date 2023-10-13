@@ -1,22 +1,3 @@
 Kleines PGM erstellen um Download elemente aufzuräumen 
-+ Auf den Ordner zugreiffen 
-+ Herausfinden, wie die Pfade enden 
-+ anhand dessen Ordner erstellen, sofern es sie noch nicht gibt
-+ datein in den Ordner schieben 
-+ zusatz, ein txt file generien der mir alle Datein auflistet in den Ordern, mit Datum und Sotriertung so wie einrückungen plus NutzerFeedback geben mit einer MessageBox
-
-Pdf
-   test.pfd 11.9.2023
-
-
-
-Start: 
-
-string downloadPath = "C:\\Users\\domin\\Downloads";
-            var filesInDirs = Directory.GetFiles(downloadPath);
-            foreach (var file in filesInDirs)
-            {
-                string fileExtension = Path.GetExtension(file);
-                Console.WriteLine("Datei: " + file);
-                Console.WriteLine("Erweiterung: " + fileExtension);
-            }
++ alle files die älter als 30 Tage sind in einen seperaten Ordner schieben mit den richtigen ordner
++ wenn es im Download den Ordern schon gibt z.b. zip etc. dann schieb das ebenfall in Other

@@ -2,8 +2,8 @@
 {
     internal class Program
     {
-
-        public const string DOWNLOAD_PATH = @"C:\Users\domin\Downloads";
+        //public const string DOWNLOAD_PATH = @"C:\Users\domin\Downloads";
+        public const string DOWNLOAD_PATH = @"C:\Downloads";
         static void Main(string[] args)
         {
             // Alle Dateien im Download-Ordner abrufen
@@ -16,6 +16,8 @@
         { ".txt", "documents" },
         { ".doc", "documents" },
         { ".xml", "documents" },
+        { ".csv", "documents" },
+        { ".xls", "documents" },
         { ".jpg", "images" },
         { ".png", "images" },
         { ".gif", "images" },

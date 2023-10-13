@@ -2,8 +2,8 @@
 {
     internal class Program
     {
-        //public const string DOWNLOAD_PATH = @"C:\Users\domin\Downloads";
-        public const string DOWNLOAD_PATH = @"C:\Downloads";
+        public const string DOWNLOAD_PATH = @"C:\Users\domin\Downloads";
+        //public const string DOWNLOAD_PATH = @"C:\Downloads";
         static void Main(string[] args)
         {
             // Alle Dateien im Download-Ordner abrufen
@@ -64,7 +64,7 @@
                 {
                     // Wenn die Erweiterung nicht in extensionFolders ist
                     // Die Datei in den "other"-Ordner verschieben
-                    string otherFolder = Path.Combine(DOWNLOAD_PATH, "other");
+                    string otherFolder = Path.Combine(DOWNLOAD_PATH, "Folder");
                     string extensionSubfolder = Path.Combine(otherFolder, fileExtension.TrimStart('.'));
                     string destinationFilePath = Path.Combine(extensionSubfolder, fileName);
 

@@ -2,29 +2,63 @@
 {
     internal class Program
     {
-        public const string DOWNLOAD_PATH = @"C:\Users\domin\Downloads";
-        //public const string DOWNLOAD_PATH = @"C:\Downloads";
         static void Main(string[] args)
         {
+            Console.WriteLine("Welchen Ordner möchten Sie sortieren?");
+            Console.WriteLine("1: Download");
+            Console.WriteLine("2: Papierkorb");
+
+            char choice = Console.ReadKey().KeyChar;
+            string folderPath;
+            string rootPath = @"C:\";
+            //string rootPath = @"C:\Users\domin\";
+
+
+            if (choice == '1')
+            {
+                folderPath = Path.Combine(rootPath, "Downloads");
+            }
+            else if (choice == '2')
+            {
+
+                //TODO::
+                //    Der Zugriff auf den Papierkorb und das Wiederherstellen von Dateien erfordert die Verwendung der Windows-Shell-API und ist komplexer.
+                folderPath = Path.Combine(rootPath, "$Recycle.Bin");
+
+                //folderPath = @"$Recycle.Bin";
+            }
+            else
+            {
+                Console.WriteLine("Ungültige Auswahl");
+                return;
+            }
+
+            SortFilesInFolder(folderPath);
+        }
+
+        static void SortFilesInFolder(string folderPath)
+        {
+
             // Alle Dateien im Download-Ordner abrufen
-            var filesInDirs = Directory.GetFiles(DOWNLOAD_PATH);
+            var filesInDirs = Directory.GetFiles(folderPath);
 
             // Dictionary, um Erweiterungen und zugehörige Ordner zu speichern
             Dictionary<string, string> extensionFolders = new Dictionary<string, string>
-    {
-        { ".pdf", "documents" },
-        { ".txt", "documents" },
-        { ".doc", "documents" },
-        { ".xml", "documents" },
-        { ".csv", "documents" },
-        { ".xls", "documents" },
-        { ".jpg", "images" },
-        { ".png", "images" },
-        { ".gif", "images" },
-        { ".mp3", "media" },
-        { ".mp4", "media" }
 
-    };
+                {
+                    { ".pdf", "documents" },
+                    { ".txt", "documents" },
+                    { ".doc", "documents" },
+                    { ".xml", "documents" },
+                    { ".csv", "documents" },
+                    { ".xls", "documents" },
+                    { ".jpg", "images" },
+                    { ".png", "images" },
+                    { ".gif", "images" },
+                    { ".mp3", "media" },
+                    { ".mp4", "media" }
+
+                };
 
             // Schleife über alle Dateien
             foreach (var file in filesInDirs)
@@ -39,7 +73,7 @@
                     // Ordnername basierend auf der Erweiterung holen
                     string folderName = extensionFolders[fileExtension];
                     // Pfad zum Hauptordner erstellen
-                    string extensionFolder = Path.Combine(DOWNLOAD_PATH, folderName);
+                    string extensionFolder = Path.Combine(folderPath, folderName);
                     // Pfad zum Unterordner für die Dateiendung erstellen
                     string extensionSubfolder = Path.Combine(extensionFolder, fileExtension.TrimStart('.'));
                     // Zielpfad für die Datei erstellen
@@ -64,7 +98,7 @@
                 {
                     // Wenn die Erweiterung nicht in extensionFolders ist
                     // Die Datei in den "other"-Ordner verschieben
-                    string otherFolder = Path.Combine(DOWNLOAD_PATH, "Folder");
+                    string otherFolder = Path.Combine(folderPath, "Folder");
                     string extensionSubfolder = Path.Combine(otherFolder, fileExtension.TrimStart('.'));
                     string destinationFilePath = Path.Combine(extensionSubfolder, fileName);
 
@@ -81,7 +115,7 @@
             }
 
             // Nachdem alle Dateien verschoben wurden, leere Ordner löschen
-            DeleteEmptyFolders(DOWNLOAD_PATH);
+            DeleteEmptyFolders(folderPath);
         }
 
         // Methode zum Löschen leerer Ordner
@@ -103,3 +137,4 @@
         }
     }
 }
+
